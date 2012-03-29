@@ -14,8 +14,8 @@ setup(
     author_email='zsp007@gmail.com',
     packages=find_packages(),
 package_data={
-'mmseg.data':['*.dic'],
-'mmseg.mmseg_cpp':['*.h', '*.cpp'],
+    'mmseg.data':[ '*.dic',], 
+    'mmseg.mmseg_cpp':[ 'mmseg_cpp/*.h' ],
 },
 long_description="""
 MMseg中文分词 Chinese Segment On MMSeg Algorithm
