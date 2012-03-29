@@ -27,14 +27,14 @@ def word_len2(s):
             for i in xrange(len(y)-1):
                 w = y[i:i+2]
                 if w in WORD2:
-                    if len(tmp) >= 2:
-                        result.extend(tmp_word)
+                  #  if len(tmp) >= 2:
+                    result.extend(tmp_word)
                     result.append(w)
                     tmp_word = []
                 else:
                     tmp_word.append(w)
-            if len(tmp_word) >= 2:
-                result.extend(tmp_word)
+            #if len(tmp_word) >= 2:
+            result.extend(tmp_word)
             if 2 <=len(y) <= 5:
                 result.append(y)
     return result
