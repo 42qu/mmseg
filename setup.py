@@ -12,6 +12,7 @@ setup(
     packages = find_packages(),
 package_data={
 "mmseg.data":["*.dic"],
+"mmseg.mmseg_cpp":["*.h","*.cpp"],
 },
 long_description="""
 MMseg中文分词 Chinese Segment On MMSeg Algorithm
