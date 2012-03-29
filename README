@@ -1,5 +1,9 @@
 张沈鹏(zsp007@gmail.com) 修改版 rmmseg-cpp
 
+github
+
+    https://github.com/42qu/mmseg
+
 
 安装:
 python setup.py install
