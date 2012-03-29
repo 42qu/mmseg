@@ -35,7 +35,7 @@ def word_len2(s):
                     tmp_word.append(w)
             #if len(tmp_word) >= 2:
             result.extend(tmp_word)
-            if 2 <=len(y) <= 5:
+            if len(y) <= 5:
                 result.append(y)
     return result
 
@@ -85,18 +85,20 @@ def seg_keyword_search(txt):
 def seg_txt_search(txt):
     result = []
     buffer = []
+    def _():
+        if len(buffer) > 1:
+            result.extend(word_len2(u"".join(buffer)))
+        elif buffer:
+            if u"一" <= buffer[0] <= u"龥":
+                if buffer[0] not in SMALLCHAR:
+                    result.append(buffer[0])
+
     for word in seg_txt(txt):
         word = word.decode("utf-8", "ignore")
-
         if len(word) == 1:
             buffer.append(word)
         else:
-            if len(buffer) > 1:
-                result.extend(word_len2("".join(buffer)))
-            elif buffer:
-                if u"一" <= buffer[0] <= u"龥":
-                    if buffer[0] not in SMALLCHAR:
-                        result.append(buffer[0])
+            _()
             buffer = []
             if len(word) <= 16:
                 word = word.lower()
@@ -108,13 +110,7 @@ def seg_txt_search(txt):
                 else:
                     result.extend(word_len2(word))
 
-    if len(buffer) > 1:
-        result.extend(word_len2("".join(buffer)))
-    elif buffer:
-        if u"一" <= buffer[0] <= u"龥":
-            if buffer[0] not in SMALLCHAR:
-                result.append(buffer[0])
-
+    _()
 
     result = [i.encode("utf-8", "ignore") if type(i) is unicode else i for i in result]
 
@@ -123,28 +119,5 @@ def seg_txt_search(txt):
 
 
 if __name__ == "__main__":
-    text = "我们是80后"
-    for i in seg_txt(text):
+    for i in word_len2("是：张无忌"):
         print i
-
-    raise
-    text = """哈尔罗杰历险记(套)
-    卡拉马佐夫兄弟
-    银河英雄传说
-    张无忌在光明顶
-    韦帅望的江湖(Ⅲ众望所归)
-    少年韦帅望之童年结束了
-苍空战旗  作者: 神巫六六  
-    　　 　晋江文学网站驻站作家，已出版多部作品。
-剑神一笑
-抓鬼敢死队
-""".split("\n")
-    for line in text:
-        print "-"*10
-        print line
-        for i in seg_txt_search(line):
-            print i
-        for i in seg_keyword_search(line):
-            print i
-        for i in seg_title_search(line):
-            print i
